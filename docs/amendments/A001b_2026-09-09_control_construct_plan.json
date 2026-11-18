@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "A-EXP-004",
+  "title": "PD-control construct check using the locked three-axis peak-velocity pipeline",
+  "evidence_status": "post_lock_exploratory",
+  "revision_change_request_id": 18,
+  "timing": "Specified after review of the locked primary results and editorial feedback.",
+  "population": {
+    "PD": "WearGait-PD Version 1 participants with a valid bilateral SelfPace_matTURN recording and complete age, sex, and height covariates.",
+    "control": "WearGait-PD Version 1 controls with a valid bilateral SelfPace_matTURN recording and complete age, sex, and height covariates."
+  },
+  "shared_task_rationale": "SelfPace_matTURN is the only standard-pace walking task available for both groups. The locked task model found no material difference between SelfPace_matTURN and standard SelfPace walking for the primary sensor outcome (FDR p=.703).",
+  "pipeline": "Apply the unmodified locked run_locked_analysis.py three-axis low-pass, PCA projection, swing-detection, and median peak angular-velocity extraction to each wrist. No task-, axis-, or threshold-selection is based on this comparison.",
+  "outcomes": [
+    "Absolute log right-to-left ratio of median peak angular velocity (primary construct check).",
+    "Bilateral mean of median arm-swing amplitude in degrees (supportive expected group-difference check)."
+  ],
+  "estimands": [
+    "Unadjusted standardized mean difference (PD minus control).",
+    "Age-, sex-, and height-adjusted PD group coefficient and two-sided p value from ordinary least squares."
+  ],
+  "claim_boundary": "Supportive same-dataset construct evidence only. It does not validate individual clinical-side classification, establish external validation, alter the locked primary estimand, or rescue a null result.",
+  "reporting": "Report both the asymmetry and amplitude outcomes, including any null result, and label all estimates post-result exploratory."
+}
