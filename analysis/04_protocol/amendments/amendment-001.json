@@ -1,0 +1,36 @@
+{
+  "changes": {
+    "discordance_calibration": {
+      "model": "Logistic regression for clinical agreement using continuous absolute log ratio; descriptive bins fixed at <0.10, 0.10-0.25, 0.25-0.50, and >0.50 only for visualization",
+      "outcomes": [
+        "Clinical-direction agreement",
+        "Within-bout directional stability where two segment estimates are available"
+      ],
+      "population": "Locked V1 same-day SP primary cohort",
+      "predictor": "Absolute locked arm-swing log ratio",
+      "safeguard": "The 0.10 boundary will not exclude participants or redefine the primary analysis"
+    },
+    "exact_sample_head_to_head": {
+      "arm_measure": "Locked median peak angular velocity lower-side classification",
+      "estimands": [
+        "Paired difference in clinical-direction agreement with participant bootstrap 95% CI",
+        "Exact McNemar test based on arm-only versus step-only concordance",
+        "Spearman association between signed sensor ratios and signed clinical laterality"
+      ],
+      "interpretation": "Estimation-first and exploratory; no claim of confirmatory superiority",
+      "population": "Participants in the locked V1 same-day SP primary cohort with valid bilateral step length from the same SelfPace walking bout",
+      "step_measure": "Mean contralateral landing-foot step length by side, minimum four steps per side, log(R/L), shorter side classified as sensor-lower side"
+    },
+    "multiplicity": "All new p values are descriptive and exploratory. Confidence intervals and compatibility across definitions take priority.",
+    "reporting": "Keep the locked primary result first. Label additions in Methods, Results, abstract, tables, and supplement as post-result exploratory analyses.",
+    "timing_and_status": "Created after inspection of the locked arm-swing results and the existing Claude pipeline outputs. Every added analysis is post-result exploratory; the original H1 and H2 estimands and success criteria remain unchanged.",
+    "triangulation": {
+      "alternate_arm_pipeline": "The existing 0.3-3 Hz PCA-RMS pipeline will be audited against source code and outputs and described as an alternative analytic pipeline on overlapping data",
+      "controls": "The PD-control arm-swing asymmetry comparison will be supportive construct evidence only, adjusted for age, sex, and height, with the null mean-amplitude result reported",
+      "wording": "Neither analysis is external validation"
+    }
+  },
+  "reason": "Add transparent post-result exploratory arm-versus-step comparison, discordance calibration, and alternative-pipeline triangulation without modifying locked primary analyses",
+  "schema_version": "1.0",
+  "sequence": 1
+}
