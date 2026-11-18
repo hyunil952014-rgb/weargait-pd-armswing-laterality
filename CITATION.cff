@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article."
+title: "Analysis code for: Does the Lower-Swing Wrist Mark the More Affected Side in Parkinson Disease? Agreement and Exploratory Side-Specific Accuracy"
+authors:
+  - family-names: Kim
+    given-names: Hyeonil
+    affiliation: "Department of Physical Therapy, Graduate School, Gachon University"
+  - family-names: Lim
+    given-names: Chaegil
+    affiliation: "Department of Physical Therapy, College of Medical Science, Gachon University"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-18"
