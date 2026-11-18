@@ -17,7 +17,6 @@ The study compares the wrist with lower peak angular velocity during walking wit
 | `analysis/05_analysis/exploratory_v4` … `v9` | Post-result exploratory analyses defined in the amendments |
 | `analysis/07_reporting/` | Statistics computed at the reporting stage (Table 3, Figure 1, paired AUC, participant flow) |
 | `analysis/revision_r1/` | Analyses added at peer review (see `docs/peer_review_R1_analyses.md`) |
-| `figures/` | Scripts for Figures 2 and 3 and Supplementary Figure S1 |
 
 Apart from the locked script, the scripts are the authors' scripts with hard-coded local data paths replaced by the `WEARGAIT_RAW` environment variable; the analysis logic is unchanged.
 
@@ -47,13 +46,13 @@ pip install -r requirements.txt
 WEARGAIT_RAW=/path/to/weargait_data bash run_all.sh
 ```
 
-`run_all.sh` runs, in order: inventories → locked primary analysis → validation → exploratory analyses (v4–v9) → reporting statistics → peer-review analyses → figures. Outputs are written next to each script. The peer-review step first checks that its signal-processing helper reproduces every locked per-wrist output exactly. The whole run takes a few minutes on a laptop.
+`run_all.sh` runs, in order: inventories → locked primary analysis → validation → exploratory analyses (v4–v9) → reporting statistics → peer-review analyses. Outputs are written next to each script. The peer-review step first checks that its signal-processing helper reproduces every locked per-wrist output exactly. The whole run takes a few minutes on a laptop.
 
-The exploratory v4 step (same-bout step length and an alternative processing pipeline, Supplementary Tables S2 and S3) compares against participant-level outputs of an earlier parallel pipeline (`analysis/05_analysis/exploratory_v4/provenance/*.csv`). These files are not redistributed and are available from the authors on request; `run_all.sh` skips this step when they are absent. The scripts that produced the arm-swing snapshot are included in the same folder; only their data-path line was changed, so their hashes differ from those recorded in `triangulation_audit.json`.
+The exploratory v4 step (same-bout step length and an alternative processing pipeline, Supplementary Tables S2 and S3) compares against participant-level outputs of an earlier parallel pipeline (`analysis/05_analysis/exploratory_v4/provenance/*.csv`). These files, and the scripts of that earlier pipeline, are not redistributed and are available from the authors on request; place the files in `analysis/05_analysis/exploratory_v4/provenance/` to run this step. `run_all.sh` skips this step when they are absent.
 
 ## Verification
 
-Before release, the repository was copied to an empty folder and `run_all.sh` was run against the WearGait-PD files (about 7.5 minutes). Every output of the locked, exploratory and peer-review analyses matched the outputs reported in the article value by value (JSON and CSV files; local paths and file hashes excluded), the validation step passed all 32 checks, and the reporting statistics reproduced Table 3 and the paired AUC difference.
+Before release, the repository was copied to an empty folder and `run_all.sh` was run against the WearGait-PD files (about 7.5 minutes). Every output of the locked, exploratory and peer-review analyses matched the outputs used in the article value by value (JSON and CSV files; local paths and file hashes excluded), the validation step passed all 32 checks, and the reporting statistics reproduced Table 3 and the paired AUC difference.
 
 ## Where results appear in the article
 

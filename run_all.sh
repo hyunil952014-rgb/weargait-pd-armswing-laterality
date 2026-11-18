@@ -24,8 +24,4 @@ echo "== 10. Peer-review analyses";       $PY analysis/revision_r1/build_cache.p
 $PY analysis/revision_r1/revision_r1_A1_A6.py > logs_revision_A1_A6.txt
 $PY analysis/revision_r1/revision_r1_A7_A12.py
 $PY analysis/revision_r1/revision_r1_A5b_cross_site.py > logs_revision_A5b.txt
-echo "== 11. Figures"
-$PY figures/make_figure2.py analysis/05_analysis figures/output
-$PY figures/make_figure3.py figures/output
-$PY figures/make_figS1.py
 echo "done"

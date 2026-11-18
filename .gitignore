@@ -13,8 +13,6 @@ analysis/05_analysis/exploratory_v4/provenance/*.csv
 analysis/07_reporting/*.json
 analysis/revision_r1/cache/
 analysis/revision_r1/output_*/
-figures/output/
-figures/Figure_S1.png
 logs_*.txt
 __pycache__/
 .DS_Store
