@@ -385,26 +385,35 @@ def main() -> None:
     }
     json_dump(HERE / "alternate_pipeline_results.json", alternate)
 
-    controls = control_construct_check()
-    original_step = pd.read_csv(PROVENANCE / "claude_step_asym_SelfPace.csv")
-    step_check = steps.merge(original_step, left_on="participant", right_on="pid", how="left")
-    maximum_step_difference = float((step_check["step_log_R_over_L"] - step_check["logratio_step_sp"]).abs().max())
-    original_h2h = pd.read_csv(PROVENANCE / "claude_H2H_paired.csv")
-    overlap = set(merged["participant"]) & set(original_h2h["pid"])
-    triangulation = {
-        "locked_primary_n": int(len(merged)),
-        "claude_h2h_n": int(len(original_h2h)),
-        "participant_overlap_n": int(len(overlap)),
-        "all_locked_primary_participants_in_claude_h2h": bool(len(overlap) == len(merged)),
-        "independent_cohort": False,
-        "reproduced_step_logratio_maximum_absolute_difference": maximum_step_difference,
-        "control_construct_file": "control_construct_check.csv",
-        "control_construct_summary": controls.to_dict(orient="records"),
-        "source_snapshot_hashes": {
-            path.name: sha256(path) for path in sorted(PROVENANCE.iterdir()) if path.is_file()
-        },
-    }
-    json_dump(HERE / "triangulation_audit.json", triangulation)
+    # Optional cross-check against participant-level outputs of an earlier parallel pipeline
+    # (not redistributed). No reported value depends on it; Supplementary Tables S2 and S3 come
+    # from head_to_head_results.json and alternate_pipeline_results.json above.
+    maximum_step_difference = None
+    provenance_files = [PROVENANCE / name for name in (
+        "claude_armswing_SPmT.csv", "claude_step_asym_SelfPace.csv", "claude_H2H_paired.csv")]
+    if all(path.is_file() for path in provenance_files):
+        controls = control_construct_check()
+        original_step = pd.read_csv(PROVENANCE / "claude_step_asym_SelfPace.csv")
+        step_check = steps.merge(original_step, left_on="participant", right_on="pid", how="left")
+        maximum_step_difference = float((step_check["step_log_R_over_L"] - step_check["logratio_step_sp"]).abs().max())
+        original_h2h = pd.read_csv(PROVENANCE / "claude_H2H_paired.csv")
+        overlap = set(merged["participant"]) & set(original_h2h["pid"])
+        triangulation = {
+            "locked_primary_n": int(len(merged)),
+            "claude_h2h_n": int(len(original_h2h)),
+            "participant_overlap_n": int(len(overlap)),
+            "all_locked_primary_participants_in_claude_h2h": bool(len(overlap) == len(merged)),
+            "independent_cohort": False,
+            "reproduced_step_logratio_maximum_absolute_difference": maximum_step_difference,
+            "control_construct_file": "control_construct_check.csv",
+            "control_construct_summary": controls.to_dict(orient="records"),
+            "source_snapshot_hashes": {
+                path.name: sha256(path) for path in sorted(PROVENANCE.iterdir()) if path.is_file()
+            },
+        }
+        json_dump(HERE / "triangulation_audit.json", triangulation)
+    else:
+        print("[v4] provenance files not present: cross-check against the earlier pipeline skipped")
     make_figure(merged, bins)
 
     outputs = {}
