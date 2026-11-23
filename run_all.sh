@@ -9,11 +9,7 @@ PY=${PYTHON:-python3}
 echo "== 1. File inventories";            $PY analysis/03_exploration/prepare_inventory.py
 echo "== 2. Locked primary analysis";     $PY analysis/05_analysis/run_locked.py > logs_locked.txt
 echo "== 3. Validation of locked outputs"; $PY analysis/05_analysis/validate_analysis.py
-if [ -f analysis/05_analysis/exploratory_v4/provenance/claude_armswing_SPmT.csv ]; then
-  echo "== 4a. Exploratory v4 (step length, alternative pipeline)"; $PY analysis/05_analysis/exploratory_v4/run_exploratory_v4.py
-else
-  echo "== 4a. Exploratory v4 skipped: provenance inputs not present (see README)"
-fi
+echo "== 4a. Exploratory v4 (step length, alternative pipeline)"; $PY analysis/05_analysis/exploratory_v4/run_exploratory_v4.py
 echo "== 4b. PD-control construct check"; $PY analysis/05_analysis/exploratory_v4/run_control_construct_v5.py
 echo "== 5. Control reference, AUC, magnitude (amendment 002)"; $PY analysis/05_analysis/exploratory_v6/run_conditional_validity_v6.py
 echo "== 6. Cross-site reference (amendment 003)"; $PY analysis/05_analysis/exploratory_v6/run_cross_site_v7.py

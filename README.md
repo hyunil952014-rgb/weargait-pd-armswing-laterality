@@ -48,11 +48,16 @@ WEARGAIT_RAW=/path/to/weargait_data bash run_all.sh
 
 `run_all.sh` runs, in order: inventories → locked primary analysis → validation → exploratory analyses (v4–v9) → reporting statistics → peer-review analyses. Outputs are written next to each script. The peer-review step first checks that its signal-processing helper reproduces every locked per-wrist output exactly. The whole run takes a few minutes on a laptop.
 
-The exploratory v4 step (same-bout step length and an alternative processing pipeline, Supplementary Tables S2 and S3) compares against participant-level outputs of an earlier parallel pipeline (`analysis/05_analysis/exploratory_v4/provenance/*.csv`). These files, and the scripts of that earlier pipeline, are not redistributed and are available from the authors on request; place the files in `analysis/05_analysis/exploratory_v4/provenance/` to run this step. `run_all.sh` skips this step when they are absent.
+The exploratory v4 step computes same-bout step length and an alternative processing pipeline (Supplementary Tables S2 and S3) from the WearGait-PD files. It also contains an optional cross-check against participant-level outputs of an earlier parallel pipeline (`analysis/05_analysis/exploratory_v4/provenance/*.csv`); these participant-level files are not redistributed, the cross-check runs only when they are present, and no value reported in the article depends on it.
 
 ## Verification
 
-Before release, the repository was copied to an empty folder and `run_all.sh` was run against the WearGait-PD files (about 7.5 minutes). Every output of the locked, exploratory and peer-review analyses matched the outputs used in the article value by value (JSON and CSV files; local paths and file hashes excluded), the validation step passed all 32 checks, and the reporting statistics reproduced Table 3 and the paired AUC difference.
+Before release, the repository was copied to an empty folder and `run_all.sh` was run against the WearGait-PD files (about 7.5 minutes). The analysis outputs used in the article matched the archived JSON and CSV values, excluding local paths and file hashes. The validation step passed all 32 checks, and the reporting statistics reproduced Table 3 and the paired AUC difference. The two optional v4 cross-check outputs were omitted because the corresponding inputs were absent.
+
+## Version history
+
+- **v1.1.0** (second revision): the v4 step no longer requires the earlier pipeline's participant-level files; `run_all.sh` now always runs it. The results reported in Supplementary Tables S2 and S3 matched the archived analysis outputs. No other script changed.
+- **v1.0.0** (first revision): initial release.
 
 ## Where results appear in the article
 
